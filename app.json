@@ -15,7 +15,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow camera access for video identification",
+        "NSMicrophoneUsageDescription": "Allow microphone access for video identification"
+    }
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +29,21 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "@tokenstreet/react-native-idnow-videoident",
+        {
+            "ios": {
+                "overrideBuildTypeToStaticFramework": true,
+                "applyUseFrameworksM1SimulatorWorkaround": true
+            },
+            "android": {
+                "excludeDuplicateClasses": true
+            }
+        }
+    ],
+      "expo-build-properties"
+    ]
   }
 }

@@ -19,13 +19,15 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Allow camera access for video identification",
         "NSMicrophoneUsageDescription": "Allow microphone access for video identification"
-    }
+      },
+      "bundleIdentifier": "com.semaphor.idnowtest"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.semaphor.idnowtest"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,16 +36,21 @@
       [
         "@tokenstreet/react-native-idnow-videoident",
         {
-            "ios": {
-                "overrideBuildTypeToStaticFramework": true,
-                "applyUseFrameworksM1SimulatorWorkaround": true
-            },
-            "android": {
-                "excludeDuplicateClasses": true
-            }
+          "ios": {
+            "overrideBuildTypeToStaticFramework": true,
+            "applyUseFrameworksM1SimulatorWorkaround": true
+          },
+          "android": {
+            "excludeDuplicateClasses": true
+          }
         }
-    ],
+      ],
       "expo-build-properties"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7e3f50c5-8272-466b-9e48-e0e93e7bc207"
+      }
+    }
   }
 }

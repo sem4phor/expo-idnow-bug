@@ -1,0 +1,59 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '33.0.0'
+        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '21')
+        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '33')
+        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '33')
+        if (findProperty('android.kotlinVersion')) {
+            kotlinVersion = findProperty('android.kotlinVersion')
+        }
+        frescoVersion = findProperty('expo.frescoVersion') ?: '2.5.0'
+
+        // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
+        ndkVersion = "23.1.7779620"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath('com.android.tools.build:gradle:7.4.1')
+        classpath('com.facebook.react:react-native-gradle-plugin')
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url(new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android'))
+        }
+        maven {
+            // Android JSC is installed from npm
+            url(new File(['node', '--print', "require.resolve('jsc-android/package.json')"].execute(null, rootDir).text.trim(), '../dist'))
+        }
+
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+// @generated begin @tokenstreet/react-native-idnow-videoident - Repositories - expo prebuild (DO NOT MODIFY) sync-2c2673064400247fb61b69f00314823a39b68ac1
+        jcenter() {
+            // JCenter is now read-only. Therefore, no new versions are published there any more.
+            // We only fetch the necessary dependencies for IDnow from JCenter to avoid loading old dependencies.
+            content {
+                includeModule("me.relex", "circleindicator")
+                includeModule("com.github.barteksc", "android-pdf-viewer")
+            }
+        }
+        maven() {
+            url "https://raw.githubusercontent.com/idnow/de.idnow.android/master"
+            content {
+                includeModule("de.idnow.sdk", "idnow-android-sdk")
+                includeModule("de.idnow.insights", "idnow-android-insights-sdk")
+            }
+        }
+// @generated end @tokenstreet/react-native-idnow-videoident - Repositories
+    }
+}
